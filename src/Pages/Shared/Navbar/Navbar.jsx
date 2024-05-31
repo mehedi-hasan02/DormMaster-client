@@ -20,7 +20,7 @@ const Navbar = () => {
         <div className="navbar fixed z-10 bg-black/30 text-white max-w-screen-xl">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[20] p-2 shadow rounded-box w-52">
                         {navOptions}
                     </ul>
                 </div>
