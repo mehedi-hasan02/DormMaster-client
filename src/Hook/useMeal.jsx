@@ -12,7 +12,7 @@ const useMeal = () => {
         })
     },[])
 
-    console.log(meals);
+    // console.log(meals);
     return [meals];
 };
 
