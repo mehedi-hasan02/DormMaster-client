@@ -2,7 +2,7 @@
 
 const MealCard = ({ meal }) => {
     return (
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl mb-5">
             <figure><img src={meal.image} alt="Meals" /></figure>
             <div className="card-body">
                 <h2 className="card-title">
