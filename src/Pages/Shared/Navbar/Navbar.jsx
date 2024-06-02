@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
+    const users = true;
+
     // const navigate = useNavigate();
 
     // const handelLogout = () => {
@@ -34,20 +36,33 @@ const Navbar = () => {
                     {navOptions}
                 </ul>
             </div>
-            {/* <div className="navbar-end">
+            <div className="navbar-end">
+                {/* <div>
+                    <Link to='/login' className="btn">Join us</Link>
+                </div> */}
                 {
                     users ?
-                        <div>
-                            <Link onClick={handelLogout} className="btn">Logout</Link>
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-black/50 rounded-box w-52">
+                                <li>
+                                    <p>Mehedi Hasan</p>
+                                </li>
+                                <li><Link to='/dashboard'>Dashboard</Link></li>
+                                <li><button>Logout</button></li>
+                            </ul>
                         </div>
                         :
                         <div>
-                            <Link to='/login' className="btn">Login</Link>
-                            <Link to='/register' className="btn">Register</Link>
+                            <Link to='/login' className="btn">Join us</Link>
                         </div>
                 }
 
-            </div> */}
+            </div>
         </div>
     );
 };
