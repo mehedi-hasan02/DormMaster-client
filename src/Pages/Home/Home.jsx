@@ -1,5 +1,6 @@
 import Banner from "./Banner/Banner";
 import MealsCategory from "./MealsCategory/MealsCategory";
+import Membership from "./Membership/Membership";
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Banner/>
             <MealsCategory/>
+            <Membership/>
         </div>
     );
 };

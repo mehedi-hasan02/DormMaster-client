@@ -88,7 +88,7 @@ const AddMeal = () => {
                         <input type="file" className="file-input file-input-ghost w-full max-w-xs" {...register('image', { required: true })} />
                     </div>
                     <div className="text-center">
-                        <button style={buttonStyle} className="btn text-white">Add Item <FaUtensils /></button>
+                        <button style={buttonStyle} className="btn text-white">Add Meal <FaUtensils /></button>
                     </div>
                 </form>
             </div>

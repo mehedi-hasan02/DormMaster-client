@@ -11,7 +11,7 @@ const AllMeals = () => {
 
     useEffect(() => {
         if (meals.length) {
-            setDisplayedMeals(meals.slice(0, 20));
+            setDisplayedMeals(meals.slice(0, 21));
         }
     }, [meals]);
 
@@ -19,7 +19,7 @@ const AllMeals = () => {
         setTimeout(() => {
             setDisplayedMeals(prevMeals => [
                 ...prevMeals,
-                ...meals.slice(prevMeals.length, prevMeals.length + 20)
+                ...meals.slice(prevMeals.length, prevMeals.length + 21)
             ]);
         }, 1000);
     };
