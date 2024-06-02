@@ -6,8 +6,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useAuth from '../../Hook/useAuth';
 import { useForm } from "react-hook-form"
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const { signIn } = useAuth();
     const [logInError, setLogInError] = useState('');
     const navigate = useNavigate();
@@ -27,7 +29,7 @@ const Login = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        const {email,password,captcha} = data;
+        const { email, password, captcha } = data;
     }
 
     // const handelLogin = e => {
@@ -78,14 +80,19 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" {...register("password", { required: true })} />
+                            <div className="flex items-center w-full relative">
+                                <input type={showPassword ? "text" : "password"} name="password" placeholder="password" className="input input-bordered w-full" {...register("password", { required: true })} />
+                                <span onClick={() => setShowPassword(!showPassword)}>
+                                    {showPassword ? <FaEyeSlash className="absolute top-4 right-2 cursor-pointer"></FaEyeSlash> : <FaEye className="absolute top-4 right-2 cursor-pointer" />}
+                                </span>
+                            </div>
                             {errors.password && <span className="text-red-500">This field is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <LoadCanvasTemplate />
                             </label>
-                            <input type="text" name="captcha" placeholder="Type here" className="input input-bordered" {...register("captcha", { required: true })}/>
+                            <input type="text" name="captcha" placeholder="Type here" className="input input-bordered" {...register("captcha", { required: true })} />
                             {errors.captcha && <span className="text-red-500">This field is required</span>}
                         </div>
                         <div>
