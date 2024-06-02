@@ -7,11 +7,10 @@ const useMeal = () => {
     const {data: meals = []} = useQuery({
         queryKey: ['meals'],
         queryFn: async()=>{
-            const res =await axiosPublic.get('/meals')
+            const res =await axiosPublic.get('/meal')
             return res.data;
         }
     })
-
     
     return [meals];
 };

@@ -6,7 +6,8 @@ import MealDetails from "../Pages/MealDetails/MealDetails";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
-import AddMeal from "../Pages/AddMeal/AddMeal";
+import AddMeal from "../Pages/Dashboard/AddMeal/AddMeal";
+
 
 const router = createBrowserRouter([
     {
