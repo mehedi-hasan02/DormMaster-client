@@ -1,5 +1,3 @@
-import { useLoaderData, useParams } from "react-router-dom";
-import useMeal from "../../Hook/useMeal";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 
