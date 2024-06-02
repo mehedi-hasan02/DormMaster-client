@@ -6,6 +6,7 @@ import MealDetails from "../Pages/MealDetails/MealDetails";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
+import AddMeal from "../Pages/AddMeal/AddMeal";
 
 const router = createBrowserRouter([
     {
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <Dashboard/>,
         children: [
-            
+            //admin route
+            {
+                path: 'addMeal',
+                element: <AddMeal/>
+            }
         ]
     }
 ])

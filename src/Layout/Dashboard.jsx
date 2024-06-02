@@ -1,6 +1,5 @@
 import { CgProfile, CgServer } from "react-icons/cg";
-import { FaAd, FaCalendar, FaCartPlus, FaHome, FaList, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
-import { IoBag, IoMail, IoMenu } from "react-icons/io5";
+import { FaHome, FaList, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { MdOutlineReviews, MdOutlineUpcoming } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
