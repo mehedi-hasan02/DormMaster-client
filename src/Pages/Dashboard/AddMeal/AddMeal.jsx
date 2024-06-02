@@ -4,6 +4,7 @@ import { FaUtensils } from "react-icons/fa";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hook/useAuth";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -11,6 +12,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddMeal = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const {users} = useAuth();
     const {
         register,
         handleSubmit,
@@ -35,6 +37,9 @@ const AddMeal = () => {
                 rating: data.rating,
                 like: data.like,
                 description: data.description,
+                adminName: users.displayName,
+                adminEmail: users.email,
+
             }
 
             const mealRes = await axiosSecure.post('/meal', mealItem);
