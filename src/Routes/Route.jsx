@@ -8,6 +8,7 @@ import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import AddMeal from "../Pages/Dashboard/AddMeal/AddMeal";
 import AdminAllMeals from "../Pages/Dashboard/AdminAllMeals/AdminAllMeals";
+import UpdateMeal from "../Pages/Dashboard/UpdateMeal/UpdateMeal";
 
 
 const router = createBrowserRouter([
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             {
                 path: 'mealDetail/:id',
                 element: <MealDetails/>,
-                // loader: ({params})=>fetch(`meals.json/${params.id}`)
+                loader: ({params})=>fetch(`meals.json/${params.id}`)
             },
             {
                 path: 'login',
@@ -49,7 +50,12 @@ const router = createBrowserRouter([
             },
             {
                 path: 'allMeals',
-                element: <AdminAllMeals/>
+                element: <AdminAllMeals/>,
+            },
+            {
+                path: 'updateMeal/:id',
+                element: <UpdateMeal/>,
+                loader: ({params})=>fetch(`http://localhost:8000/meal/${params.id}`),
             }
         ]
     }

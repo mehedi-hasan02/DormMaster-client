@@ -33,7 +33,7 @@ const AdminAllMeals = () => {
                                 <td>{meal.review}</td>
                                 <td>{meal.adminName}</td>
                                 <td>
-                                    <Link to={`/dashboard/updateItem/${meal._id}`}>
+                                    <Link to={`/dashboard/updateMeal/${meal._id}`}>
                                         <button className="btn btn-ghost btn-lg bg-orange-400"><FaRegEdit /></button>
                                     </Link>
                                 </td>
