@@ -13,6 +13,7 @@ import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import AdminUpcomingMeals from "../Pages/Dashboard/AdminUpcomimgMeals/AdminUpcomingMeals";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
+import AllReviews from "../Pages/Dashboard/AllReviews/AllReviews";
 
 const admin = true;
 
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: 'mealDetail/:id',
                 element: <MealDetails />,
-                loader: ({ params }) => fetch(`meals.json/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
             },
             {
                 path: 'login',
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
                 {
                     path: 'upcomingMeals',
                     element: <AdminUpcomingMeals/>,
+                },
+                {
+                    path: 'allReviews',
+                    element: <AllReviews/>,
                 }
             ] 
             :

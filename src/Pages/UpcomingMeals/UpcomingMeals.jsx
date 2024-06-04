@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import Cover from "../Shared/Cover/Cover";
 import allMealsCover from '../../assets/banner/cover1.jpg';
 import MealCard from "../Shared/MealCard/MealCard";
+import UpcomingMealCard from "./UpcomingMealCard";
 
 const UpcomingMeals = () => {
     const axiosPublic = useAxiosPublic();
@@ -26,7 +27,7 @@ const UpcomingMeals = () => {
             />
             <div className="grid lg:grid-cols-3 gap-8">
                 {
-                    upcomingMeals.map(upcomingMeal=><MealCard key={upcomingMeal._id} meal={upcomingMeal}></MealCard>)
+                    upcomingMeals.map(upcomingMeal=><UpcomingMealCard key={upcomingMeal._id} meal={upcomingMeal}></UpcomingMealCard>)
                 }
             </div>
         </div>
