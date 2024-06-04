@@ -47,7 +47,7 @@ const AddMeal = () => {
                 reset();
                 Swal.fire({
                     icon: "success",
-                    title: "Menu item added successful",
+                    title: "Meal item added successful",
                     showConfirmButton: false,
                     timer: 1500
                 });

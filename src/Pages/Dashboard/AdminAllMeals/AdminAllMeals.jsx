@@ -41,7 +41,7 @@ const AdminAllMeals = () => {
                                     <button className="btn btn-ghost btn-lg bg-red-500"><FaTrashAlt /></button>
                                 </td>
                                 <td>
-                                    <Link>
+                                    <Link to={`/mealDetail/${meal?._id}`}>
                                         <button className="btn btn-ghost text-orange-400">View Meal</button>
                                     </Link>
                                 </td>

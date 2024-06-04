@@ -9,54 +9,81 @@ import Dashboard from "../Layout/Dashboard";
 import AddMeal from "../Pages/Dashboard/AddMeal/AddMeal";
 import AdminAllMeals from "../Pages/Dashboard/AdminAllMeals/AdminAllMeals";
 import UpdateMeal from "../Pages/Dashboard/UpdateMeal/UpdateMeal";
+import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
+import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
+import AdminUpcomingMeals from "../Pages/Dashboard/AdminUpcomimgMeals/AdminUpcomingMeals";
+import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 
+const admin = true;
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main/>,
+        element: <Main />,
         children: [
             {
                 path: '/',
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: 'meals',
-                element: <AllMeals/>,
+                element: <AllMeals />,
             },
             {
                 path: 'mealDetail/:id',
-                element: <MealDetails/>,
-                loader: ({params})=>fetch(`meals.json/${params.id}`)
+                element: <MealDetails />,
+                loader: ({ params }) => fetch(`meals.json/${params.id}`)
             },
             {
                 path: 'login',
-                element: <Login/>,
+                element: <Login />,
             },
             {
                 path: 'register',
-                element: <Register/>,
+                element: <Register />,
+            },
+            {
+                path: 'upcomingMeal',
+                element: <UpcomingMeals/>,
             }
         ]
     },
     {
         path: 'dashboard',
-        element: <Dashboard/>,
+        element: <Dashboard />,
         children: [
             //admin route
-            {
-                path: 'addMeal',
-                element: <AddMeal/>
-            },
-            {
-                path: 'allMeals',
-                element: <AdminAllMeals/>,
-            },
-            {
-                path: 'updateMeal/:id',
-                element: <UpdateMeal/>,
-                loader: ({params})=>fetch(`http://localhost:8000/meal/${params.id}`),
-            }
+            ...(admin) ? [
+                {
+                    path: 'addMeal',
+                    element: <AddMeal />
+                },
+                {
+                    path: 'allMeals',
+                    element: <AdminAllMeals />,
+                },
+                {
+                    path: 'updateMeal/:id',
+                    element: <UpdateMeal />,
+                    loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
+                },
+                {
+                    path: 'profile',
+                    element: <AdminProfile/>
+                },
+                {
+                    path: 'upcomingMeals',
+                    element: <AdminUpcomingMeals/>,
+                }
+            ] 
+            :
+            [
+                {
+                    path: 'profile',
+                    element: <UserProfile/>
+                }
+            ]
+            
         ]
     }
 ])

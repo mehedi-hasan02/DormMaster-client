@@ -1,9 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../../Hook/useAuth";
 
 
 const Navbar = () => {
 
     const users = true;
+    // const {users} = useAuth();
+    // console.log(users);
 
     // const navigate = useNavigate();
 
@@ -14,7 +17,7 @@ const Navbar = () => {
     const navOptions = <>
         <li className="text-white"><Link to='/'>Home</Link></li>
         <li className="text-white"><Link to='/meals'>Meals</Link></li>
-        <li className="text-white"><Link to='/upcomingMeals'>Upcoming Meals</Link></li>
+        <li className="text-white"><Link to='/upcomingMeal'>Upcoming Meals</Link></li>
 
     </>
 
@@ -52,7 +55,7 @@ const Navbar = () => {
                                 <li>
                                     <p>Mehedi Hasan</p>
                                 </li>
-                                <li><Link to='/dashboard'>Dashboard</Link></li>
+                                <li><Link to='/dashboard/profile'>Dashboard</Link></li>
                                 <li><button>Logout</button></li>
                             </ul>
                         </div>

@@ -12,7 +12,7 @@ const MealDetails = () => {
         queryKey: ['mealDetails', id],
         queryFn: async()=> {
             const res = await axiosSecure.get(`/meal/${id}`);
-            return res.data
+            return res.data;
         }       
     });
 
