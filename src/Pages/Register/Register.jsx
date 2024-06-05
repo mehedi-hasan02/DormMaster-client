@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAuth from '../../Hook/useAuth';
+import useAxiosPublic from '../../Hook/useAxiosPublic';
 
 
 const Register = () => {
     const { createUser, handleUpdateProfile, logOut } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
 
     const {
@@ -27,7 +29,22 @@ const Register = () => {
         createUser(email, password)
             .then(res => {
                 handleUpdateProfile(name, photo)
-                    
+                    .then(() => {
+                        const userInfo = {
+                            name,
+                            email,
+                            membership: 'Bronze',
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    reset();
+                                    logOut()
+                                    toast.success('User created successfully');
+                                    navigate('/login')
+                                }
+                            })
+                    })
 
             })
             .catch(error => {

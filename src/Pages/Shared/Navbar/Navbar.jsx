@@ -1,18 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hook/useAuth";
 
 
 const Navbar = () => {
 
-    const users = true;
-    // const {users} = useAuth();
+    // const users = true;
+    const {users, logOut} = useAuth();
     // console.log(users);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const handelLogout = () => {
-    //     logOut();
-    // }
+    const handelLogout = () => {
+        logOut();
+        navigate('/');
+    }
 
     const navOptions = <>
         <li className="text-white"><Link to='/'>Home</Link></li>
@@ -56,7 +57,7 @@ const Navbar = () => {
                                     <p>Mehedi Hasan</p>
                                 </li>
                                 <li><Link to='/dashboard/profile'>Dashboard</Link></li>
-                                <li><button>Logout</button></li>
+                                <li><button onClick={handelLogout}>Logout</button></li>
                             </ul>
                         </div>
                         :

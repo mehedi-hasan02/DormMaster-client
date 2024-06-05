@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import useAuth from '../../Hook/useAuth';
 import { useForm } from "react-hook-form"
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import SocialLogin from '../../Component/SocialLogin/SocialLogin';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +31,24 @@ const Login = () => {
 
     const onSubmit = (data) => {
         const { email, password, captcha } = data;
+        if (validateCaptcha(captcha)) {
+            setLogInError('')
+            signIn(email, password)
+                .then(result => {
+                    const user = result.user
+                    // console.log(user);
+                    toast.success('Login Successful')
+                    navigate(from, { replace: true })
+                })
+                .catch((error) => {
+                    
+                    {
+                        toast.error('Invalid Email and Password');
+                    }
+                })
+        } else {
+            setLogInError('Captcha wrong');
+        }
     }
 
     // const handelLogin = e => {
@@ -94,6 +113,7 @@ const Login = () => {
                             </label>
                             <input type="text" name="captcha" placeholder="Type here" className="input input-bordered" {...register("captcha", { required: true })} />
                             {errors.captcha && <span className="text-red-500">This field is required</span>}
+                            {logInError && <span className='text-red-500'>{logInError}</span>}
                         </div>
                         <div>
                             <p>Don't have an account <Link to='/register' className='text-blue-500'>Sign Up</Link></p>
@@ -104,7 +124,7 @@ const Login = () => {
                     </form>
                     <div className='divider'></div>
                     <div className='text-center'>
-                        {/* <SocialLogin /> */}
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

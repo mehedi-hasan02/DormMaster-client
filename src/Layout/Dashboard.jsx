@@ -3,9 +3,11 @@ import { FaHome, FaList, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { MdOutlineReviews, MdOutlineUpcoming } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hook/useAdmin";
 
 
 const Dashboard = () => {
+    // const [isAdmin] = useAdmin();
     const isAdmin = true;
     return (
         <div className="flex">

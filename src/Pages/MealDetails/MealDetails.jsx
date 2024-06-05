@@ -8,7 +8,7 @@ import useAuth from "../../Hook/useAuth";
 const MealDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    const {users} = useAuth();
+    const { users } = useAuth();
 
     const { data: mealDetail = [] } = useQuery({
         queryKey: ['mealDetails', id],
@@ -43,14 +43,15 @@ const MealDetails = () => {
         }
     })
 
-    const handelMealRequest = async() =>{
+    const handelMealRequest = async () => {
         const userEmail = users?.email;
+        const userName = users?.displayName;
         const mealTitle = mealDetail?.title;
         const mealLike = mealDetail?.like;
         const mealReview = allReview?.length;
         const status = 'Pending';
 
-        const requestData = {userEmail,mealTitle,mealLike,mealReview,status};
+        const requestData = { userEmail, userName, mealTitle, mealLike, mealReview, status };
 
         const res = await axiosSecure.post('/mealRequest', requestData);
         console.log(res.data);

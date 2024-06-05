@@ -14,8 +14,11 @@ import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import AdminUpcomingMeals from "../Pages/Dashboard/AdminUpcomimgMeals/AdminUpcomingMeals";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import AllReviews from "../Pages/Dashboard/AllReviews/AllReviews";
+import ServeMeals from "../Pages/Dashboard/ServeMeals/ServeMeals";
+import useAdmin from "../Hook/useAdmin";
+import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 
-const admin = true;
+// const isAdmin = useAdmin();
 
 const router = createBrowserRouter([
     {
@@ -46,7 +49,8 @@ const router = createBrowserRouter([
             {
                 path: 'upcomingMeal',
                 element: <UpcomingMeals/>,
-            }
+            },
+            
         ]
     },
     {
@@ -54,7 +58,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         children: [
             //admin route
-            ...(admin) ? [
+            // ...(isAdmin) ? [
                 {
                     path: 'addMeal',
                     element: <AddMeal />
@@ -79,17 +83,25 @@ const router = createBrowserRouter([
                 {
                     path: 'allReviews',
                     element: <AllReviews/>,
-                }
-            ] 
-            :
-            [
+                },
+                {
+                    path: 'serveMeals',
+                    element: <ServeMeals/>,
+                },
+                {
+                    path: 'manageUsers',
+                    element: <ManageUsers/>
+                },
+            // ] 
+            // :
+            // [
                 {
                     path: 'profile',
                     element: <UserProfile/>
                 }
             ]
             
-        ]
+        // ]
     }
 ])
 
