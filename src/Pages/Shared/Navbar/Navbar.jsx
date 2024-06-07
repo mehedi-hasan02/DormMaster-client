@@ -56,7 +56,7 @@ const Navbar = () => {
                                 <li>
                                     <p>Mehedi Hasan</p>
                                 </li>
-                                <li><Link to='/dashboard/profile'>Dashboard</Link></li>
+                                <li><Link to='/dashboard'>Dashboard</Link></li>
                                 <li><button onClick={handelLogout}>Logout</button></li>
                             </ul>
                         </div>

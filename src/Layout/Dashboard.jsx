@@ -7,8 +7,8 @@ import useAdmin from "../Hook/useAdmin";
 
 
 const Dashboard = () => {
-    // const [isAdmin] = useAdmin();
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+    // const isAdmin = true;
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400 p-2">
@@ -17,7 +17,7 @@ const Dashboard = () => {
                         isAdmin ?
                             <>
                                 <li>
-                                    <NavLink to='/dashboard/profile'>
+                                    <NavLink to='/dashboard/adminProfile'>
                                         <CgProfile />
                                         Admin Profile
                                     </NavLink>
@@ -62,13 +62,13 @@ const Dashboard = () => {
                             :
                             <>
                                 <li>
-                                    <NavLink to='/dashboard/profile'>
+                                    <NavLink to='/dashboard/userProfile'>
                                         <CgProfile />
                                         My Profile
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/reservation'>
+                                    <NavLink to='/dashboard/requestMeals'>
                                         <VscGitPullRequestGoToChanges />
                                         Request Meal
                                     </NavLink>

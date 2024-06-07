@@ -17,6 +17,7 @@ import AllReviews from "../Pages/Dashboard/AllReviews/AllReviews";
 import ServeMeals from "../Pages/Dashboard/ServeMeals/ServeMeals";
 import useAdmin from "../Hook/useAdmin";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import UserRequestMeals from "../Pages/Dashboard/UserRequestMeals/UserRequestMeals";
 
 // const isAdmin = useAdmin();
 
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
                     loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
                 },
                 {
-                    path: 'profile',
+                    path: 'adminProfile',
                     element: <AdminProfile/>
                 },
                 {
@@ -96,8 +97,12 @@ const router = createBrowserRouter([
             // :
             // [
                 {
-                    path: 'profile',
+                    path: 'userProfile',
                     element: <UserProfile/>
+                },
+                {
+                    path : 'requestMeals',
+                    element: <UserRequestMeals/>
                 }
             ]
             
