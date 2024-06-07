@@ -5,13 +5,16 @@ import useAxiosSecure from '../../../Hook/useAxiosSecure'
 import useAuth from "../../../Hook/useAuth";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AdminUpcomingMeals = () => {
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
-    const {users} = useAuth();
+    const [sortOrder, setSortOrder] = useState(null);
+    const { users } = useAuth();
     const {
         register,
         handleSubmit,
@@ -44,6 +47,7 @@ const AdminUpcomingMeals = () => {
             const mealRes = await axiosSecure.post('/upcomingMeal', mealItem);
             if (mealRes.data.insertedId) {
                 reset();
+                refetch();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -54,6 +58,66 @@ const AdminUpcomingMeals = () => {
             }
         }
     }
+
+    const { data: upcomingMeals = [],refetch } = useQuery({
+        queryKey: ['upcomingAdminMeals', sortOrder],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/upcomingMeal');
+            let mealsData = res.data;
+            if(sortOrder === 'like')
+                {
+                    mealsData = mealsData.sort((a,b)=> b.like - a.like);
+                }
+            return mealsData;
+        }
+    })
+
+    const handelPublish = async (id) => {
+        const res = await axiosSecure.get(`/upcomingMeal/${id}`);
+        const publishMeals = res.data;
+        // const adminName = users?.displayName;
+        // const adminEmail = users?.email;
+
+        const { title, category, image, price, ingredients, rating, like, description } = publishMeals;
+        const mealItem = {
+            title: title,
+            category: category,
+            image: image,
+            price: price,
+            ingredients: ingredients,
+            rating: rating,
+            like: like,
+            description: description,
+            adminName: users?.displayName,
+            adminEmail: users?.email,
+
+        }
+
+        const mealRes = await axiosSecure.post('/meal', mealItem);
+        if (mealRes.data.insertedId) {
+            reset();
+            Swal.fire({
+                icon: "success",
+                title: "Meal item publish successful",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            axiosSecure.delete(`/upcomingMeal/${id}`)
+            .then(()=>{
+                refetch();
+                console.log('delete success');
+            })
+        }
+    }
+
+    // const handelSort = (sort) =>{
+    //     if(sort === 'like')
+    //         {
+    //             const sorting = [...upcomingMeals].sort((a,b)=> a.like - b.like);
+
+    //         }
+    // }
 
     const buttonStyle = {
         background: 'linear-gradient(90deg, #835D23 0%, #B58130 100%)',
@@ -66,7 +130,9 @@ const AdminUpcomingMeals = () => {
                     <details className="dropdown">
                         <summary className="m-1 btn">Sort By</summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-black/50 text-white rounded-box w-52">
-                            <li><a>Like</a></li>
+                            <li>
+                                <button onClick={()=>setSortOrder('like')}>Like</button>
+                            </li>
                         </ul>
                     </details>
                 </div>
@@ -160,38 +226,38 @@ const AdminUpcomingMeals = () => {
 
             <div>
                 <div className="overflow-x-auto">
-                    <table className="table">
+                    <table className="table text-center">
                         {/* head */}
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Name</th>
-                                <th>Job</th>
-                                <th>Favorite Color</th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Rating</th>
+                                <th>Like</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* row 1 */}
-                            <tr>
-                                <th>1</th>
-                                <td>Cy Ganderton</td>
-                                <td>Quality Control Specialist</td>
-                                <td>Blue</td>
-                            </tr>
-                            {/* row 2 */}
-                            <tr className="hover">
-                                <th>2</th>
-                                <td>Hart Hagerty</td>
-                                <td>Desktop Support Technician</td>
-                                <td>Purple</td>
-                            </tr>
-                            {/* row 3 */}
-                            <tr>
-                                <th>3</th>
-                                <td>Brice Swyre</td>
-                                <td>Tax Accountant</td>
-                                <td>Red</td>
-                            </tr>
+                            {
+                                upcomingMeals.map((meals, index) =>
+                                    <tr key={meals._id}>
+                                        <th>{index + 1}</th>
+                                        <td>{meals.title}</td>
+                                        <td>${meals.price}</td>
+                                        <td>{meals.rating}</td>
+                                        <td>{meals.like}</td>
+                                        <td>
+                                            <button
+                                                onClick={() => handelPublish(meals._id)}
+                                                className="btn bg-orange-400 text-white hover:bg-orange-400">
+                                                Publish
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+
                         </tbody>
                     </table>
                 </div>
