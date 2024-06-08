@@ -12,7 +12,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddMeal = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
-    const {users} = useAuth();
+    const { users } = useAuth();
     const {
         register,
         handleSubmit,
@@ -32,10 +32,11 @@ const AddMeal = () => {
                 title: data.mealTitle,
                 category: data.category,
                 image: res.data.data.display_url,
-                price: data.price,
+                price: parseFloat(data.price),
                 ingredients: data.ingredients,
-                rating: data.rating,
-                like: data.like,
+                rating: parseFloat(data.rating),
+                like: parseInt(data.like),
+                review: parseInt(data.review),
                 description: data.description,
                 adminName: users.displayName,
                 adminEmail: users.email,
@@ -117,6 +118,13 @@ const AddMeal = () => {
                         </label>
 
                     </div>
+                    <label className="form-control w-full">
+                        <div className="label">
+                            <span className="label-text">Review</span>
+                        </div>
+                        <input type="number" placeholder="Review" className="input input-bordered w-full" {...register('review', { required: true })} />
+                        {errors.review && <span className="text-red-500">This field is required</span>}
+                    </label>
                     <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Description</span>

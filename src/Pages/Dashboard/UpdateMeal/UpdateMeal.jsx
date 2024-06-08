@@ -144,7 +144,7 @@ const UpdateMeal = () => {
                                 <span className="label-text">Category</span>
                             </div>
                             <select className="select select-bordered w-full " onChange={handleCategoryChange} value={selectedCategory} required>
-                            <option value='Breakfast'>Breakfast</option>
+                                <option value='Breakfast'>Breakfast</option>
                                 <option value='Lunch'>Lunch</option>
                                 <option value='Dinner'>Dinner</option>
 
@@ -194,6 +194,13 @@ const UpdateMeal = () => {
                         </label>
 
                     </div>
+                    <label className="form-control w-full">
+                        <div className="label">
+                            <span className="label-text">Review</span>
+                        </div>
+                        <input type="number" placeholder="Review" className="input input-bordered w-full" {...register('review', { required: true })} />
+                        {errors.review && <span className="text-red-500">This field is required</span>}
+                    </label>
                     <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Description</span>

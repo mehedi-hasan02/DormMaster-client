@@ -2,11 +2,29 @@ import { Link } from "react-router-dom";
 import useMeal from "../../../Hook/useMeal";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import useAuth from "../../../Hook/useAuth";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const AdminAllMeals = () => {
-    const [meals] = useMeal();
+    const [meals,refetch] = useMeal();
     const {users} = useAuth();
+    const axiosSecure = useAxiosSecure();
+
+    const handelDelete = async(id)=>{
+        const res =await axiosSecure.delete(`/meal/${id}`);
+        if(res.data.deletedCount > 0)
+            refetch();
+            {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Meal successfully deleted",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+    }
     return (
         <div className="overflow-x-auto">
             <table className="table text-center">
@@ -38,7 +56,9 @@ const AdminAllMeals = () => {
                                     </Link>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-lg bg-red-500"><FaTrashAlt /></button>
+                                    <button
+                                    onClick={()=>handelDelete(meal._id)}
+                                     className="btn btn-ghost btn-lg bg-red-500"><FaTrashAlt /></button>
                                 </td>
                                 <td>
                                     <Link to={`/mealDetail/${meal?._id}`}>

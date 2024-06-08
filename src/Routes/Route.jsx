@@ -18,6 +18,7 @@ import ServeMeals from "../Pages/Dashboard/ServeMeals/ServeMeals";
 import useAdmin from "../Hook/useAdmin";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import UserRequestMeals from "../Pages/Dashboard/UserRequestMeals/UserRequestMeals";
+import MyReview from "../Pages/Dashboard/MyReview/MyReview";
 
 // const isAdmin = useAdmin();
 
@@ -102,7 +103,11 @@ const router = createBrowserRouter([
                 },
                 {
                     path : 'requestMeals',
-                    element: <UserRequestMeals/>
+                    element: <UserRequestMeals/>,
+                },
+                {
+                    path: 'myReview',
+                    element: <MyReview/>
                 }
             ]
             

@@ -38,6 +38,7 @@ const AdminUpcomingMeals = () => {
                 ingredients: data.ingredients,
                 rating: data.rating,
                 like: data.like,
+                review: data.review,
                 description: data.description,
                 mealStatus: 'Upcoming',
                 adminName: users.displayName,
@@ -59,15 +60,14 @@ const AdminUpcomingMeals = () => {
         }
     }
 
-    const { data: upcomingMeals = [],refetch } = useQuery({
+    const { data: upcomingMeals = [], refetch } = useQuery({
         queryKey: ['upcomingAdminMeals', sortOrder],
         queryFn: async () => {
             const res = await axiosSecure.get('/upcomingMeal');
             let mealsData = res.data;
-            if(sortOrder === 'like')
-                {
-                    mealsData = mealsData.sort((a,b)=> b.like - a.like);
-                }
+            if (sortOrder === 'like') {
+                mealsData = mealsData.sort((a, b) => b.like - a.like);
+            }
             return mealsData;
         }
     })
@@ -87,6 +87,7 @@ const AdminUpcomingMeals = () => {
             ingredients: ingredients,
             rating: rating,
             like: like,
+            // review: review,
             description: description,
             adminName: users?.displayName,
             adminEmail: users?.email,
@@ -104,41 +105,33 @@ const AdminUpcomingMeals = () => {
             });
 
             axiosSecure.delete(`/upcomingMeal/${id}`)
-            .then(()=>{
-                refetch();
-                console.log('delete success');
-            })
+                .then(() => {
+                    refetch();
+                    console.log('delete success');
+                })
         }
     }
 
-    // const handelSort = (sort) =>{
-    //     if(sort === 'like')
-    //         {
-    //             const sorting = [...upcomingMeals].sort((a,b)=> a.like - b.like);
-
-    //         }
-    // }
 
     const buttonStyle = {
         background: 'linear-gradient(90deg, #835D23 0%, #B58130 100%)',
     };
     return (
         <div>
-            <h1>Upcoming meals</h1>
             <div className="flex justify-between items-center mx-8">
                 <div>
                     <details className="dropdown">
-                        <summary className="m-1 btn">Sort By</summary>
+                        <summary className="m-1 btn bg-orange-400 text-white hover:bg-orange-400">Sort By</summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-black/50 text-white rounded-box w-52">
                             <li>
-                                <button onClick={()=>setSortOrder('like')}>Like</button>
+                                <button onClick={() => setSortOrder('like')}>Like</button>
                             </li>
                         </ul>
                     </details>
                 </div>
                 <div>
                     {/* Open the modal using document.getElementById('ID').showModal() method */}
-                    <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Upcoming Meal</button>
+                    <button className="btn bg-orange-400 text-white hover:bg-orange-400" onClick={() => document.getElementById('my_modal_1').showModal()}>Add Upcoming Meal</button>
                     <dialog id="my_modal_1" className="modal">
                         <div className="modal-box relative">
                             <div className="">
@@ -197,6 +190,13 @@ const AdminUpcomingMeals = () => {
                                         </label>
 
                                     </div>
+                                    <label className="form-control w-full">
+                                        <div className="label">
+                                            <span className="label-text">Review</span>
+                                        </div>
+                                        <input type="number" placeholder="Review" className="input input-bordered w-full" {...register('review', { required: true })} />
+                                        {errors.review && <span className="text-red-500">This field is required</span>}
+                                    </label>
                                     <label className="form-control w-full">
                                         <div className="label">
                                             <span className="label-text">Description</span>

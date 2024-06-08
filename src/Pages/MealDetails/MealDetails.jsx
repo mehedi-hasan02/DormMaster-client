@@ -10,7 +10,7 @@ const MealDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { users } = useAuth();
 
-    const { data: mealDetail = [] } = useQuery({
+    const { data: mealDetail = [],refetch } = useQuery({
         queryKey: ['mealDetails', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/meal/${id}`);
@@ -26,29 +26,35 @@ const MealDetails = () => {
         const form = e.target;
         const review = form.review.value;
         const mealId = mealDetail._id;
+        const mealTitle = mealDetail.title;
+        const like = mealDetail.like;
+        const userEmail = users?.email;
 
+        const reviewData = { review, mealId, mealTitle, like, userEmail };
+        const reviewRes = await axiosSecure.post('/review', reviewData);
+        const reviewCountRes = await axiosSecure.patch(`/reviewCount/${mealId}`);
+        console.log('Review Count Increment Response:', reviewCountRes.data);
 
-        const reviewData = { review, mealId };
-        const res = await axiosSecure.post('/review', reviewData);
         refetch();
         form.reset();
-        console.log(res.data);
+        console.log(reviewRes.data);
+
     }
 
-    const { data: allReview = [], refetch } = useQuery({
-        queryKey: ['review'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/review/${mealDetail?._id}`);
-            return res.data;
-        }
-    })
+    // const { data: allReview = [], refetch } = useQuery({
+    //     queryKey: ['review'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/review/${mealDetail?._id}`);
+    //         return res.data;
+    //     }
+    // })
 
     const handelMealRequest = async () => {
         const userEmail = users?.email;
         const userName = users?.displayName;
         const mealTitle = mealDetail?.title;
         const mealLike = mealDetail?.like;
-        const mealReview = allReview?.length;
+        const mealReview = mealDetail.review;
         const status = 'Pending';
 
         const requestData = { userEmail, userName, mealTitle, mealLike, mealReview, status };
@@ -57,7 +63,10 @@ const MealDetails = () => {
         console.log(res.data);
     }
 
-    // console.log(allReview);
+    const handelLikeCount = async()=>{
+        const likeRes = await axiosSecure.patch(`likeCount/${mealDetail._id}`);
+        refetch();
+    }
 
     return (
         <div>
@@ -87,14 +96,16 @@ const MealDetails = () => {
                                 Ingredients: {mealDetail.ingredients}
                             </p>
                             <div className="text-white flex gap-5">
-                                <button className="flex items-center">
+                                <button
+                                    onClick={handelLikeCount}
+                                className="flex items-center">
                                     <AiOutlineLike /> {mealDetail.like}
                                 </button>
                                 <p className="flex items-center gap-2">
                                     {mealDetail.rating} <FaStar className="text-amber-500" />
                                 </p>
                                 <p>
-                                    Total review: {allReview.length}
+                                    Total review: {mealDetail.review}
                                 </p>
                             </div>
                             <div className="text-white">

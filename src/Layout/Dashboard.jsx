@@ -8,7 +8,6 @@ import useAdmin from "../Hook/useAdmin";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
-    // const isAdmin = true;
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400 p-2">
@@ -74,7 +73,7 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/paymentHistory'>
+                                    <NavLink to='/dashboard/myReview'>
                                         <MdOutlineReviews />
                                         My Reviews
                                     </NavLink>
