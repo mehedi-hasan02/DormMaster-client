@@ -1,0 +1,32 @@
+[
+    {
+      "name": "Silver",
+      "price": 10,
+      "benefits": [
+        "Enjoy a small discount on all meals",
+        "Reserve meals in advance",
+        "Weekly set meals at a discounted rate"
+      ]
+    },
+    {
+        "name": "Gold",
+        "price": 30,
+        "benefits": [
+          "Larger discount on all meals purchased",
+          "Extra weekly meals with carry-over option",
+          "Add options and sides to your meals",
+          "Bring a guest at a discounted rate"
+        ]
+    },
+    {
+        "name": "Platinum",
+        "price": 50,
+        "benefits": [
+          "Maximum discount on all meals purchased",
+          "No restrictions on the number of meals per week",
+          "Faster service to reduce wait times",
+          "Access to meals by a personal chef for special occasions"
+        ]
+    }
+]
+  

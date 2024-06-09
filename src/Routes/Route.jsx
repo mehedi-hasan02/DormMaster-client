@@ -19,6 +19,7 @@ import useAdmin from "../Hook/useAdmin";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import UserRequestMeals from "../Pages/Dashboard/UserRequestMeals/UserRequestMeals";
 import MyReview from "../Pages/Dashboard/MyReview/MyReview";
+import CheckOut from "../Pages/CheckOut/CheckOut";
 
 // const isAdmin = useAdmin();
 
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
                 path: 'upcomingMeal',
                 element: <UpcomingMeals/>,
             },
+            {
+                path: 'checkOut/:name',
+                element: <CheckOut/>,
+                loader: ({params})=>fetch(`http://localhost:8000/plan/${params.name}`)
+            }
             
         ]
     },

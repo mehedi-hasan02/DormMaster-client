@@ -5,7 +5,7 @@ import useAuth from "../../../Hook/useAuth";
 const Navbar = () => {
 
     // const users = true;
-    const {users, logOut} = useAuth();
+    const { users, logOut } = useAuth();
     // console.log(users);
 
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="navbar fixed z-10 bg-black/30 text-white max-w-screen-xl">
+        <div className="navbar bg-black text-white max-w-screen-xl h-16">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -41,15 +41,13 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {/* <div>
-                    <Link to='/login' className="btn">Join us</Link>
-                </div> */}
                 {
+
                     users ?
-                        <div className="dropdown dropdown-end">
+                        <div className="dropdown dropdown-end z-10">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <img alt="Tailwind CSS Navbar component" src={users?.photoURL} />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-black/50 rounded-box w-52">
