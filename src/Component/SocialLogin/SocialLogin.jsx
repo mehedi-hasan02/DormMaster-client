@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import toast from "react-hot-toast";
@@ -8,6 +8,9 @@ const SocialLogin = () => {
     const { googleLogin } = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handelGoogleLogin = () => {
         googleLogin()
@@ -22,7 +25,7 @@ const SocialLogin = () => {
                     .then(res => {
                         console.log(res.data);
                         toast.success('Login successful')
-                        navigate('/')
+                        navigate(from, { replace: true })
                     })
 
             })

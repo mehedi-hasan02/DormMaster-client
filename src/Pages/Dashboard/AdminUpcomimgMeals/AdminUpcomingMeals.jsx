@@ -34,11 +34,11 @@ const AdminUpcomingMeals = () => {
                 title: data.mealTitle,
                 category: data.category,
                 image: res.data.data.display_url,
-                price: data.price,
+                price: parseFloat(data.price),
                 ingredients: data.ingredients,
-                rating: data.rating,
-                like: data.like,
-                review: data.review,
+                rating: parseFloat(data.rating),
+                like: parseInt(data.like),
+                review: parseInt(data.review),
                 description: data.description,
                 mealStatus: 'Upcoming',
                 adminName: users.displayName,
@@ -249,6 +249,7 @@ const AdminUpcomingMeals = () => {
                                         <td>{meals.like}</td>
                                         <td>
                                             <button
+                                                disabled = {meals.like < 10}
                                                 onClick={() => handelPublish(meals._id)}
                                                 className="btn bg-orange-400 text-white hover:bg-orange-400">
                                                 Publish

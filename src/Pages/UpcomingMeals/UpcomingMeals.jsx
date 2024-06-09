@@ -10,7 +10,7 @@ const UpcomingMeals = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
-    const {data: upcomingMeals = []} = useQuery({
+    const {data: upcomingMeals = [],refetch} = useQuery({
         queryKey: ['upcomingMeal'],
         queryFn: async()=>{
             const res = await axiosPublic.get('/upcomingMeal');
@@ -27,7 +27,7 @@ const UpcomingMeals = () => {
             />
             <div className="grid lg:grid-cols-3 gap-8">
                 {
-                    upcomingMeals.map(upcomingMeal=><UpcomingMealCard key={upcomingMeal._id} meal={upcomingMeal}></UpcomingMealCard>)
+                    upcomingMeals.map(upcomingMeal=><UpcomingMealCard key={upcomingMeal._id} meal={upcomingMeal} refetch={refetch}></UpcomingMealCard>)
                 }
             </div>
         </div>

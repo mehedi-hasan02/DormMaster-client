@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/config.firebase";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 // import axios from "axios";
 
 export const AuthContext = createContext(null);
@@ -9,7 +10,7 @@ const AuthProvider = ({ children }) => {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
-    // const axiosPublic = useAxiosPublic();
+    const axiosPublic = useAxiosPublic();
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -44,33 +45,20 @@ const AuthProvider = ({ children }) => {
             setUsers(currUser);
             setLoading(false);
 
-            // if(currUser)
-            //     {
-            //         const userInfo = {email: currUser.email}
-            //         axiosPublic.post('/jwt', userInfo)
-            //         .then(res=>{
-            //             if(res.data.token)
-            //                 {
-            //                     localStorage.setItem('access-token',res.data.token);
-            //                 }
-            //         })
-            //     }
-            //     else{
-            //         localStorage.removeItem('access-token');
-            //     }
-
-            // if (currUser) {
-            //     axios.post('https://blog-server-side-phi.vercel.app/jwt', loggedUser, { withCredentials: true })
-            //         .then(res => {
-            //             console.log('token response', res.data);
-            //         })
-            //     }
-            // else{
-            //     axios.post('https://blog-server-side-phi.vercel.app/logout', loggedUser, {withCredentials: true})
-            //     .then(res=>{
-            //         console.log(res.data);
-            //     })
-            // }
+            if(currUser)
+                {
+                    const userInfo = {email: currUser.email}
+                    axiosPublic.post('/jwt', userInfo)
+                    .then(res=>{
+                        if(res.data.token)
+                            {
+                                localStorage.setItem('access-token',res.data.token);
+                            }
+                    })
+                }
+                else{
+                    localStorage.removeItem('access-token');
+                }
         })
 
         return () => {

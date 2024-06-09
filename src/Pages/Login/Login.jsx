@@ -51,34 +51,6 @@ const Login = () => {
         }
     }
 
-    // const handelLogin = e => {
-    //     e.preventDefault();
-    //     const form = e.target;
-    //     const email = form.email.value;
-    //     const password = form.password.value;
-    //     const captcha = form.captcha.value;
-    //     if (validateCaptcha(captcha)) {
-    //         signIn(email, password)
-    //             .then(result => {
-    //                 const user = result.user
-    //                 // console.log(user);
-    //                 toast.success('Login Successful')
-    //                 navigate(from, { replace: true })
-    //             })
-    //             .catch((error) => {
-    //                 setLogInError(error.message)
-    //                 {
-    //                     logInError && toast.error('Invalid Email and Password');
-    //                 }
-    //             })
-    //     } else {
-    //         alert('wrong')
-    //     }
-
-
-
-    // }
-
     return (
         <div className="hero min-h-screen bg-base-200">
             <div style={{ backgroundImage: `url(${loginBgImg})` }} className="hero-content flex-col lg:flex-row shadow-2xl p-20">

@@ -85,7 +85,7 @@ const ManageUsers = () => {
                         placeholder='Search'
                         aria-label='Search'
                     />
-                    <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'>
+                    <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-[#a97d51] rounded-md hover:bg-[#a97d51] focus:bg-[#a97d51] focus:outline-none'>
                         Search
                     </button>
                 </form>

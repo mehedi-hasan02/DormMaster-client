@@ -11,7 +11,7 @@ const MealCard = ({ meal }) => {
                     </h2>
                 <p>${meal.price}</p>
                 <div className="card-actions justify-end">
-                    <Link to={`mealDetail/${meal._id}`}>
+                    <Link to={`/mealDetail/${meal._id}`}>
                         <button className="badge badge-outline">Details</button>
                     </Link>
                 </div>

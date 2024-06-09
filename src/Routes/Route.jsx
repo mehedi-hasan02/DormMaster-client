@@ -20,6 +20,8 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import UserRequestMeals from "../Pages/Dashboard/UserRequestMeals/UserRequestMeals";
 import MyReview from "../Pages/Dashboard/MyReview/MyReview";
 import CheckOut from "../Pages/CheckOut/CheckOut";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
 
 // const isAdmin = useAdmin();
 
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'mealDetail/:id',
-                element: <MealDetails />,
+                element: <PrivateRoute><MealDetails /></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
             },
             {
@@ -55,8 +57,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'checkOut/:name',
-                element: <CheckOut/>,
-                loader: ({params})=>fetch(`http://localhost:8000/plan/${params.name}`)
+                element: <PrivateRoute><CheckOut/></PrivateRoute>,
+                loader: ({params})=>fetch(`http://localhost:8000/plan/${params?.name}`)
             }
             
         ]
@@ -69,51 +71,51 @@ const router = createBrowserRouter([
             // ...(isAdmin) ? [
                 {
                     path: 'addMeal',
-                    element: <AddMeal />
+                    element: <AdminRoute><AddMeal /></AdminRoute>
                 },
                 {
                     path: 'allMeals',
-                    element: <AdminAllMeals />,
+                    element: <AdminRoute><AdminAllMeals /></AdminRoute>,
                 },
                 {
                     path: 'updateMeal/:id',
-                    element: <UpdateMeal />,
+                    element: <AdminRoute><UpdateMeal /></AdminRoute>,
                     loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
                 },
                 {
                     path: 'adminProfile',
-                    element: <AdminProfile/>
+                    element: <AdminRoute><AdminProfile/></AdminRoute>
                 },
                 {
                     path: 'upcomingMeals',
-                    element: <AdminUpcomingMeals/>,
+                    element: <AdminRoute><AdminUpcomingMeals/></AdminRoute>,
                 },
                 {
                     path: 'allReviews',
-                    element: <AllReviews/>,
+                    element: <AdminRoute><AllReviews/></AdminRoute>,
                 },
                 {
                     path: 'serveMeals',
-                    element: <ServeMeals/>,
+                    element: <AdminRoute><ServeMeals/></AdminRoute>,
                 },
                 {
                     path: 'manageUsers',
-                    element: <ManageUsers/>
+                    element: <AdminRoute><ManageUsers/></AdminRoute>
                 },
             // ] 
             // :
             // [
                 {
                     path: 'userProfile',
-                    element: <UserProfile/>
+                    element: <PrivateRoute><UserProfile/></PrivateRoute>
                 },
                 {
                     path : 'requestMeals',
-                    element: <UserRequestMeals/>,
+                    element: <PrivateRoute><UserRequestMeals/></PrivateRoute>,
                 },
                 {
                     path: 'myReview',
-                    element: <MyReview/>
+                    element: <PrivateRoute><MyReview/></PrivateRoute>
                 }
             ]
             
