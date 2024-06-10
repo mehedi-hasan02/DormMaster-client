@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             {
                 path: 'mealDetail/:id',
                 element: <PrivateRoute><MealDetails /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
+                loader: ({ params }) => fetch(`https://hostel-management-system-server-tau.vercel.app/meal/${params.id}`),
             },
             {
                 path: 'login',
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
             {
                 path: 'checkOut/:name',
                 element: <PrivateRoute><CheckOut/></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:8000/plan/${params?.name}`)
+                loader: ({params})=>fetch(`https://hostel-management-system-server-tau.vercel.app/plan/${params?.name}`)
             }
             
         ]
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
                 {
                     path: 'updateMeal/:id',
                     element: <AdminRoute><UpdateMeal /></AdminRoute>,
-                    loader: ({ params }) => fetch(`http://localhost:8000/meal/${params.id}`),
+                    loader: ({ params }) => fetch(`https://hostel-management-system-server-tau.vercel.app/meal/${params.id}`),
                 },
                 {
                     path: 'adminProfile',

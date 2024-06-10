@@ -20,7 +20,7 @@ const Navbar = () => {
         <li className="text-white"><Link to='/'>Home</Link></li>
         <li className="text-white"><Link to='/meals'>Meals</Link></li>
         <li className="text-white"><Link to='/upcomingMeal'>Upcoming Meals</Link></li>
-        <li className="text-white"><Link><IoMdNotificationsOutline className="w-[20px] h-[20px]"/></Link></li>
+        <li className="text-white"><Link><IoMdNotificationsOutline className="w-[20px] h-[20px]" /></Link></li>
 
     </>
 
@@ -35,7 +35,14 @@ const Navbar = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost text-xl">DormMaster</Link>
+                <Link to='/' className="btn btn-ghost text-xl">
+                    <div className="avatar">
+                        <div className="w-10 rounded-xl">
+                            <img src="/logo.png" />
+                        </div>
+                    </div>
+                    DormMaster
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
