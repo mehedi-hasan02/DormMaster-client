@@ -4,37 +4,41 @@ import useMeal from "../../../Hook/useMeal";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 
 const AllReviews = () => {
     const axiosSecure = useAxiosSecure();
     // const [meals] = useMeal();
 
-    const {data: allReviews = [],refetch} = useQuery({
+    const { data: allReviews = [], refetch } = useQuery({
         queryKey: ['allReviewAdmin'],
-        queryFn: async()=>{
+        queryFn: async () => {
             const res = await axiosSecure.get('/reviews');
             return res.data;
         }
     })
 
-    const handelDelete = async(id) =>{
+    const handelDelete = async (id) => {
         const res = await axiosSecure.delete(`/review/${id}`);
-        if(res.data.deletedCount > 0)
-            {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Review successfully deleted",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                refetch();
-            }
+        if (res.data.deletedCount > 0) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Review successfully deleted",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            refetch();
+        }
     }
 
     return (
         <div>
             <div className="overflow-x-auto">
+                <SectionTitle
+                    subHeading='Total Review'
+                    heading='All Reviews'
+                ></SectionTitle>
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -56,9 +60,9 @@ const AllReviews = () => {
                                     <td>{review.like}</td>
                                     <td>{review.reviewCount}</td>
                                     <td>
-                                        <button 
-                                        onClick={()=>handelDelete(review._id)}
-                                        className="btn btn-sm bg-red-500 text-white">
+                                        <button
+                                            onClick={() => handelDelete(review._id)}
+                                            className="btn btn-sm bg-red-500 text-white">
                                             <FaTrashAlt />
                                         </button>
                                     </td>

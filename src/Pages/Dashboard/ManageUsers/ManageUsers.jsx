@@ -4,6 +4,7 @@ import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hook/useAuth";
 import { useRef, useState } from "react";
+import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -74,6 +75,9 @@ const ManageUsers = () => {
 
     return (
         <div className="overflow-x-auto">
+            <div className="text-center mb-5">
+                <h2 className="text-4xl font-semibold">All Users</h2>
+            </div>
             <div className="flex flex-col lg:flex-row md:flex-row gap-3">
                 <form onSubmit={handleSearch} className="flex p-1 overflow-hidden border rounded-lg w-[300px] md:w-[330px] lg:w-[330px] mx-auto focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
                     <input

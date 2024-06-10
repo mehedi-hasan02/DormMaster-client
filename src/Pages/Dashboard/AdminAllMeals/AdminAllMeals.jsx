@@ -4,6 +4,7 @@ import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import useAuth from "../../../Hook/useAuth";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 
 
 const AdminAllMeals = () => {
@@ -27,6 +28,10 @@ const AdminAllMeals = () => {
     }
     return (
         <div className="overflow-x-auto">
+            <SectionTitle
+            subHeading='Total Meals'
+            heading='All Meals'
+            ></SectionTitle>
             <table className="table text-center">
                 {/* head */}
                 <thead>

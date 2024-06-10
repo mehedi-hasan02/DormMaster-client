@@ -7,6 +7,7 @@ import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -118,6 +119,10 @@ const AdminUpcomingMeals = () => {
     };
     return (
         <div>
+            <SectionTitle
+                subHeading='New Meal'
+                heading='Upcoming Meals'
+            ></SectionTitle>
             <div className="flex justify-between items-center mx-8">
                 <div>
                     <details className="dropdown">
@@ -249,7 +254,7 @@ const AdminUpcomingMeals = () => {
                                         <td>{meals.like}</td>
                                         <td>
                                             <button
-                                                disabled = {meals.like < 10}
+                                                disabled={meals.like < 10}
                                                 onClick={() => handelPublish(meals._id)}
                                                 className="btn bg-orange-400 text-white hover:bg-orange-400">
                                                 Publish

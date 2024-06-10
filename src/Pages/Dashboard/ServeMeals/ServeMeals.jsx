@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 
 const ServeMeals = () => {
     const axiosSecure = useAxiosSecure();
@@ -45,6 +46,10 @@ const ServeMeals = () => {
 
     return (
         <div className="overflow-x-auto">
+            <SectionTitle
+                subHeading='Pending'
+                heading='Serve Meals'
+            ></SectionTitle>
             <div className="flex flex-col lg:flex-row md:flex-row gap-3 mb-5">
                 <form onSubmit={handleSearch} className="flex p-1 overflow-hidden border rounded-lg w-[300px] md:w-[330px] lg:w-[330px] mx-auto focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
                     <input
