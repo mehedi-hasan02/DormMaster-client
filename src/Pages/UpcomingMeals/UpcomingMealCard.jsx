@@ -3,11 +3,28 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useAuth from "../../Hook/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const UpcomingMealCard = ({ meal, refetch }) => {
     const axiosSecure = useAxiosSecure();
     const { users } = useAuth();
+
+    const {data: userData} = useQuery({
+        queryKey: ['userData'],
+        queryFn: async()=>{
+            const res = await axiosSecure.get(`/users/${users?.email}`);
+            return res.data;
+        }
+    });
+
+    
     const handelLikeCount = async () => {
+
+        if(userData?.membership === 'Silver')
+            {
+                return toast.error('Please Upgrade Your membership');
+            }
         const likeRes = await axiosSecure.patch(`upcomingMealLike/${meal._id}`);
 
         // if (meal.like >= 10) {
