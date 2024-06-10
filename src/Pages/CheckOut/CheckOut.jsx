@@ -46,7 +46,7 @@ const CheckOut = () => {
             </div>
             <div className="w-3/4 mx-auto mt-10">
                 <Elements stripe={stripePromise}>
-                    <PaymentCheckOut price={singlePlan?.price}/>
+                    <PaymentCheckOut price={singlePlan?.price} plan={singlePlan?.name}/>
                 </Elements>
             </div>
         </div>

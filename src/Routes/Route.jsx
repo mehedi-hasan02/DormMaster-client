@@ -23,6 +23,7 @@ import CheckOut from "../Pages/CheckOut/CheckOut";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import ErrorPage from "../Component/ErrorPage/ErrorPage";
 
 // const isAdmin = useAdmin();
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: '/',
@@ -67,6 +69,7 @@ const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <Dashboard />,
+        
         children: [
             //admin route
             // ...(isAdmin) ? [

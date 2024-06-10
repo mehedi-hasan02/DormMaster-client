@@ -22,6 +22,7 @@ const UserProfile = () => {
             return res.data;
         }
     });
+    console.log(userData);
 
     return (
         <div className="mt-10 ml-20">

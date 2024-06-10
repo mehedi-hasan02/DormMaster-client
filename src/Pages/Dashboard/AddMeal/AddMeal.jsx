@@ -63,7 +63,7 @@ const AddMeal = () => {
             <SectionTitle heading='Add a Meal' subHeading="---What's new?---" />
 
             <div className="lg:ml-28">
-                <form className="bg-[#F3F3F3] p-14 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                <form className="bg-[#F3F3F3] lg:p-14 space-y-5" onSubmit={handleSubmit(onSubmit)}>
                     <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Meal name</span>
@@ -72,7 +72,7 @@ const AddMeal = () => {
                         {errors.mealTitle && <span className="text-red-500">This field is required</span>}
                     </label>
 
-                    <div className="flex gap-8">
+                    <div className="flex flex-col lg:flex-row gap-8">
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Category</span>
@@ -101,7 +101,7 @@ const AddMeal = () => {
                         <input type="text" placeholder="Ingredients" className="input input-bordered w-full" {...register('ingredients', { required: true })} />
                         {errors.ingredients && <span className="text-red-500">This field is required</span>}
                     </label>
-                    <div className="flex gap-8">
+                    <div className="flex flex-col lg:flex-row gap-8">
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Rating</span>

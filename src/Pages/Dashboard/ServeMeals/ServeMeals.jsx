@@ -9,7 +9,7 @@ const ServeMeals = () => {
     const [search, setSearch] = useState('');
 
     const { data: serveMeals = [], refetch } = useQuery({
-        queryKey: ['serveMeals',search],
+        queryKey: ['serveMeals', search],
         queryFn: async () => {
             const res = await axiosSecure.get(`/mealRequest?search=${search}`);
             return res.data;
@@ -60,9 +60,11 @@ const ServeMeals = () => {
                         Search
                     </button>
                 </form>
-                <button onClick={handleReset} className='btn bg-orange-400 hover:bg-orange-400 text-white mr-12'>
-                    Reset
-                </button>
+                <div className="text-center">
+                    <button onClick={handleReset} className='btn bg-orange-400 hover:bg-orange-400 text-white lg:mr-12 w-40'>
+                        Reset
+                    </button>
+                </div>
             </div>
             <table className="table text-center">
                 {/* head */}

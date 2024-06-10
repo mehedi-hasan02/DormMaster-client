@@ -5,7 +5,7 @@ import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
 
 
-const PaymentCheckOut = ({ price }) => {
+const PaymentCheckOut = ({ price,plan }) => {
     const [error, setError] = useState('')
     const [clientSecret, setClientSecret] = useState('');
     const stripe = useStripe();
@@ -73,6 +73,8 @@ const PaymentCheckOut = ({ price }) => {
                 const payUserData = { email, price, transactionId, date };
                 const res = await axiosSecure.post('/payment', payUserData);
                 if (res.data.insertedId) {
+                    const memberRes = await axiosSecure.patch(`/users/${users?.email}`, { membership: plan });
+                    console.log(memberRes.data);
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
