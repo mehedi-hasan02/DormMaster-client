@@ -14,10 +14,10 @@ const MealsCategory = () => {
         <div>
             <div className='text-center my-14 space-y-3'>
                 <h2 className='text-4xl font-bold'>Meals by Category</h2>
-                <p className='w-3/4 mx-auto'>Browse our tasty meal options by category: Breakfast, Lunch, Dinner, or All Meals. Each card includes an image, rating, price, and a details button for more information. Enjoy a convenient and delightful dining experience!</p>
+                <p className='px-2 lg:w-3/4 mx-auto'>Browse our tasty meal options by category: Breakfast, Lunch, Dinner, or All Meals. Each card includes an image, rating, price, and a details button for more information. Enjoy a convenient and delightful dining experience!</p>
             </div>
             <Tabs>
-                <TabList>
+                <TabList className='mb-5'>
                     <Tab>All Meals</Tab>
                     <Tab>Breakfast</Tab>
                     <Tab>Lunch</Tab>

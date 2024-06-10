@@ -25,7 +25,7 @@ const UpcomingMeals = () => {
                 img={allMealsCover}
                 title='CHOOSE YOUR MEAL'
             />
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8 min-h-[200px]">
                 {
                     upcomingMeals.map(upcomingMeal=><UpcomingMealCard key={upcomingMeal._id} meal={upcomingMeal} refetch={refetch}></UpcomingMealCard>)
                 }

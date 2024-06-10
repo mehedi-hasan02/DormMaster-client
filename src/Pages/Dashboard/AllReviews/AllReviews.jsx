@@ -3,18 +3,34 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import useMeal from "../../../Hook/useMeal";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AllReviews = () => {
     const axiosSecure = useAxiosSecure();
-    const [meals] = useMeal();
+    // const [meals] = useMeal();
 
-    // const {data: allReviews = []} = useQuery({
-    //     queryKey: ['allReviewAdmin'],
-    //     queryFn: async()=>{
-    //         const res = await axiosSecure.get('/reviews');
-    //         return res.data;
-    //     }
-    // })
+    const {data: allReviews = [],refetch} = useQuery({
+        queryKey: ['allReviewAdmin'],
+        queryFn: async()=>{
+            const res = await axiosSecure.get('/reviews');
+            return res.data;
+        }
+    })
+
+    const handelDelete = async(id) =>{
+        const res = await axiosSecure.delete(`/review/${id}`);
+        if(res.data.deletedCount > 0)
+            {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Review successfully deleted",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                refetch();
+            }
+    }
 
     return (
         <div>
@@ -33,19 +49,21 @@ const AllReviews = () => {
                     </thead>
                     <tbody>
                         {
-                            meals.map((meal, index) =>
-                                <tr key={meal._id}>
+                            allReviews.map((review, index) =>
+                                <tr key={review._id}>
                                     <th>{index + 1}</th>
-                                    <td>{meal.title}</td>
-                                    <td>{meal.like}</td>
-                                    <td>{meal.review}</td>
+                                    <td>{review.mealTitle}</td>
+                                    <td>{review.like}</td>
+                                    <td>{review.reviewCount}</td>
                                     <td>
-                                        <button className="btn btn-sm bg-red-500 text-white">
+                                        <button 
+                                        onClick={()=>handelDelete(review._id)}
+                                        className="btn btn-sm bg-red-500 text-white">
                                             <FaTrashAlt />
                                         </button>
                                     </td>
                                     <td>
-                                        <Link to={`/mealDetail/${meal._id}`}>
+                                        <Link to={`/mealDetail/${review.mealId}`}>
                                             <button className="btn bg-orange-400 text-white">
                                                 View Meal
                                             </button>

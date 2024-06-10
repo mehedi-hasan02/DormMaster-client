@@ -4,13 +4,39 @@ import { MdOutlineReviews, MdOutlineUpcoming } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hook/useAdmin";
+import { useState } from "react";
+import { CiCircleRemove } from "react-icons/ci";
 
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
     return (
         <div className="flex">
-            <div className="w-64 min-h-screen bg-orange-400 p-2">
+             {/* Hamburger Button */}
+             <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost lg:hidden"
+                onClick={toggleSidebar}
+            >
+                {isSidebarOpen ? (
+                    <CiCircleRemove className="h-5 w-5 text-white" />
+                ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                )}
+            </div>
+            <div
+                className={`w-64 min-h-screen bg-orange-400 p-2 ${
+                    isSidebarOpen ? "block" : "hidden"
+                } lg:block absolute top-0 left-0 z-20`}
+            >
                 <ul className="menu">
                     {
                         isAdmin ?
@@ -79,7 +105,7 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/cart'>
+                                    <NavLink to='/dashboard/paymentHistory'>
                                         <FaWallet />
                                         Payment History
                                     </NavLink>

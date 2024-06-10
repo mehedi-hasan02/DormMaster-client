@@ -21,9 +21,9 @@ const Footer = () => {
 
 
     return (
-        <footer className="footer p-10 bg-neutral text-neutral-content mt-14">
+        <footer className="footer p-5 md:p-10 lg:p-10 bg-neutral text-neutral-content mt-14">
             <aside>
-                <div className="space-y-3 ml-20">
+                <div className="space-y-3 md:ml-20 lg:ml-20">
                     <h3 className="text-3xl">Support</h3>
                     <p>Phone: +8801300000000 (10AM - 10PM)</p>
                     <p>Email: dormmaster@support.com</p>

@@ -89,7 +89,7 @@ const ManageUsers = () => {
                         Search
                     </button>
                 </form>
-                <button onClick={handleReset} className='btn'>
+                <button onClick={handleReset} className='btn bg-orange-400 hover:bg-orange-400 text-white mr-12'>
                     Reset
                 </button>
             </div>

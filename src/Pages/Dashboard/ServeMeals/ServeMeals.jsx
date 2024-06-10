@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const ServeMeals = () => {
     const axiosSecure = useAxiosSecure();
+    const [searchText, setSearchText] = useState('');
+    const [search, setSearch] = useState('');
 
     const { data: serveMeals = [], refetch } = useQuery({
-        queryKey: ['serveMeals'],
+        queryKey: ['serveMeals',search],
         queryFn: async () => {
-            const res = await axiosSecure.get('/mealRequest');
+            const res = await axiosSecure.get(`/mealRequest?search=${search}`);
             return res.data;
         }
     });
@@ -30,8 +33,37 @@ const ServeMeals = () => {
         }
     }
 
+    const handleSearch = e => {
+        e.preventDefault()
+        setSearch(searchText);
+    }
+
+    const handleReset = () => {
+        setSearch('')
+        setSearchText('')
+    }
+
     return (
         <div className="overflow-x-auto">
+            <div className="flex flex-col lg:flex-row md:flex-row gap-3 mb-5">
+                <form onSubmit={handleSearch} className="flex p-1 overflow-hidden border rounded-lg w-[300px] md:w-[330px] lg:w-[330px] mx-auto focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
+                    <input
+                        className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
+                        type='text'
+                        onChange={e => setSearchText(e.target.value)}
+                        value={searchText}
+                        name='search'
+                        placeholder='Search'
+                        aria-label='Search'
+                    />
+                    <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-[#a97d51] rounded-md hover:bg-[#a97d51] focus:bg-[#a97d51] focus:outline-none'>
+                        Search
+                    </button>
+                </form>
+                <button onClick={handleReset} className='btn bg-orange-400 hover:bg-orange-400 text-white mr-12'>
+                    Reset
+                </button>
+            </div>
             <table className="table text-center">
                 {/* head */}
                 <thead>
@@ -55,9 +87,9 @@ const ServeMeals = () => {
                                 <td>{meal.userName}</td>
                                 <td>{meal.status}</td>
                                 <td>
-                                    <button 
-                                    disabled = {meal.status === 'Delivered'}
-                                     onClick={() => handelServe(meal?._id)} className="btn bg-orange-400 hover:bg-orange-400 text-white">Serve</button>
+                                    <button
+                                        disabled={meal.status === 'Delivered'}
+                                        onClick={() => handelServe(meal?._id)} className="btn bg-orange-400 hover:bg-orange-400 text-white">Serve</button>
                                 </td>
                             </tr>
                         )

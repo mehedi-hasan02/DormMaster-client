@@ -22,6 +22,7 @@ import MyReview from "../Pages/Dashboard/MyReview/MyReview";
 import CheckOut from "../Pages/CheckOut/CheckOut";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 // const isAdmin = useAdmin();
 
@@ -115,7 +116,11 @@ const router = createBrowserRouter([
                 },
                 {
                     path: 'myReview',
-                    element: <PrivateRoute><MyReview/></PrivateRoute>
+                    element: <PrivateRoute><MyReview/></PrivateRoute>,
+                },
+                {
+                    path: 'paymentHistory',
+                    element: <PrivateRoute><PaymentHistory/></PrivateRoute>
                 }
             ]
             

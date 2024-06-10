@@ -39,14 +39,7 @@ const Banner = () => {
                     <Slide
                         image={bannerImg3}
                         heading='Hassle-Free Meal Booking'
-                        description='Streamline meal reservations with our hassle-free booking system. Allow students to easily book their meals in advance, ensuring better planning and reducing wait times during meal hours.
-
-
-
-
-
-
-                        '
+                        description='Streamline meal reservations with our hassle-free booking system. Allow students to easily book their meals in advance, ensuring better planning and reducing wait times during meal hours.'
                     ></Slide>
                 </SwiperSlide>
             </Swiper>

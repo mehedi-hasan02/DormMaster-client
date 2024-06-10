@@ -18,7 +18,7 @@ const Slide = ({ image, heading, description }) => {
                             {description}
                         </p>
                         <br />
-                        <div className="lg:w-2/5 mx-auto">
+                        <div className="md:w-3/4 lg:w-2/5 mx-auto">
                             <label className="input input-bordered flex items-center gap-2 relative">
                                 <input type="text" className="grow" placeholder="Search" />
                                 <span className="btn bg-[#55c2da] hover:bg-[#55c2da] text-white absolute right-0 px-8">Search</span>

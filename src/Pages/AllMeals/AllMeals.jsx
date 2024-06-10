@@ -24,18 +24,6 @@ const AllMeals = () => {
             ]);
         }, 1000);
     };
-    // const fetchMoreData = () => {
-    //     setTimeout(() => {
-    //         setDisplayedMeals(prevMeals => [
-    //             ...prevMeals,
-    //             ...meals.slice(prevMeals.length, prevMeals.length + 3)
-    //         ]);
-    //     }, 1000);
-    // };
-
-    // useEffect(() => {
-    //     refetch();
-    // }, []);
 
     const handleSearch = e => {
         e.preventDefault()
