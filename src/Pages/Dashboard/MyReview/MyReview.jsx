@@ -4,13 +4,15 @@ import useAuth from "../../../Hook/useAuth";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import ReviewModal from "./ReviewModal";
 import Swal from "sweetalert2";
+import { RxCrossCircled } from "react-icons/rx";
+import { useForm } from "react-hook-form";
 
 const MyReview = () => {
     const axiosSecure = useAxiosSecure();
     const { users } = useAuth();
     const [selectedReview, setSelectedReview] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { data: reviews = [], refetch } = useQuery({
         queryKey: ['reviews'],
@@ -22,37 +24,52 @@ const MyReview = () => {
 
     const myReviews = reviews.filter(review => review.userEmail === users?.email);
 
-    const handleEdit = async (id) => {
-        const response = await axiosSecure.get(`/review/${id}`);
-        const result = await response.data;
-        setSelectedReview(result);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
+
+    const handleEdit = (review) => {
+        setSelectedReview(review);
+        setIsModalOpen(true);
     };
 
-    const handleUpdate = async (data) => {
-        await axiosSecure.patch(`/review/${selectedReview._id}`, data);
-        setSelectedReview(null);
-        refetch();
+    const onSubmit = async (data) => {
+        const res = await axiosSecure.patch(`/review/${selectedReview?._id}`, data);
+        if (res.data.modifiedCount > 0) {
+            reset();
+            refetch();
+            setIsModalOpen(false);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Review update successful",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+
     };
 
-    const handelDelete = async(id) =>{
+    const handleDelete = async (id) => {
         const res = await axiosSecure.delete(`/review/${id}`);
-        if(res.data.deletedCount > 0)
-            {
-                refetch();
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your review successfully deleted",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-    }
-
-    const closeModal = () => {
-        setSelectedReview(null);
+        if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your review successfully deleted",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     };
 
+    const buttonStyle = {
+        background: 'linear-gradient(90deg, #835D23 0%, #B58130 100%)',
+    };
 
     return (
         <div>
@@ -76,13 +93,13 @@ const MyReview = () => {
                                 <td>{myReview.review}</td>
                                 <td className="flex space-x-2">
                                     <button
-                                    onClick={()=>handleEdit(myReview._id)}
+                                        onClick={() => handleEdit(myReview)}
                                         className="btn btn-sm bg-orange-400 hover:bg-orange-400 text-white"
                                     >
                                         <FaRegEdit />
                                     </button>
                                     <button
-                                    onClick={()=>handelDelete(myReview._id)}
+                                        onClick={() => handleDelete(myReview._id)}
                                         className="btn btn-sm bg-red-600 hover:bg-red-600 text-white"
                                     >
                                         <FaTrashAlt />
@@ -99,12 +116,37 @@ const MyReview = () => {
                 </table>
             </div>
 
-            {selectedReview && (
-                <ReviewModal
-                    review={selectedReview}
-                    onClose={closeModal}
-                    onSubmit={handleUpdate}
-                />
+            {isModalOpen && (
+                <dialog className="modal" open>
+                    <div className="modal-box relative">
+                        <form className="bg-[#F3F3F3] p-14 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Your Review</span>
+                                </div>
+                                <input
+                                    type="text"
+                                    defaultValue={selectedReview.review}
+                                    placeholder="Enter your review"
+                                    className="input input-bordered w-full"
+                                    {...register('review', { required: true })}
+                                />
+                                {errors.review && <span className="text-red-500">This field is required</span>}
+                            </label>
+                            <div className="text-center">
+                                <button style={buttonStyle} className="btn text-white">Update Review</button>
+                            </div>
+                        </form>
+                        <div className="modal-action">
+                            <button
+                                className="btn btn-xl bg-orange-400 text-white hover:bg-orange-400 absolute top-0 right-0"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                <RxCrossCircled />
+                            </button>
+                        </div>
+                    </div>
+                </dialog>
             )}
         </div>
     );

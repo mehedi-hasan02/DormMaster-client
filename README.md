@@ -2,8 +2,6 @@
 
 #### Live Link:
 [Visit DormMaster](https://magenta-semifreddo-dd33c1.netlify.app/)
-##### User Name: Mehedi
-##### Pass: Ss@123456
 
 #### Key Feature:
 - Easily navigate through sections with a convenient navbar.
