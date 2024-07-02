@@ -25,3 +25,12 @@
 - Only premium can give like in upcoming meals.
 - User can see his/her requested meals, reviews, payment history in dashboard
 
+#### For Cloning Project:
+- Need to install node
+- For Frontend Configuration:
+    - Set up Firebase configuration in the frontend.
+- For Backend Configuration"
+    - MongoDB user & password
+    - Access token secret
+    - Stripe secret key
+
