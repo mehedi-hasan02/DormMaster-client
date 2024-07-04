@@ -1,12 +1,14 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hook/useAuth";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import useAdmin from "../../../Hook/useAdmin";
 
 
 const Navbar = () => {
 
     // const users = true;
     const { users, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
     // console.log(users);
 
     const navigate = useNavigate();
@@ -63,7 +65,7 @@ const Navbar = () => {
                                 <li>
                                     <p>Mehedi Hasan</p>
                                 </li>
-                                <li><Link to='/dashboard'>Dashboard</Link></li>
+                                {isAdmin ? <li><Link to='/dashboard/adminProfile'>Dashboard</Link></li> : <li><Link to='/dashboard/userProfile'>Dashboard</Link></li>}
                                 <li><button onClick={handelLogout}>Logout</button></li>
                             </ul>
                         </div>
