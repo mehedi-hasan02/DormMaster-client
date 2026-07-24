@@ -41,7 +41,7 @@ const Login = () => {
                     navigate(from, { replace: true })
                 })
                 .catch((error) => {
-                    
+
                     {
                         toast.error('Invalid Email and Password');
                     }
